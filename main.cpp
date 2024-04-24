@@ -8,7 +8,8 @@ using namespace std;
 int main()
 try
 {
-    vector<int> v {1, 0, 5, 7, 9, 2, 4, 6, 8};
+    //vector<int> v {1, 0, 5, 7, 9, 2, 4, 6, 8};
+    vector<int> v {1, 0, 5, 7};
 
     HeapNode heap(3);
 
@@ -27,12 +28,12 @@ try
         heap.valid();
     }
 
-    // while ( !heap.empty() )
-    // {
-    //     int x = heap.pop();
-    //     prn(x, heap, "pop");
-    //     heap.valid();
-    // }
+    while ( !heap.empty() )
+    {
+        int x = heap.pop();
+        prn(x, heap, "pop");
+        heap.valid();
+    }
 }
 catch (string s) { cout << "Error: " << s << '\n'; }
 catch (...) { cout << "exception\n"; }
