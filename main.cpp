@@ -8,8 +8,8 @@ using namespace std;
 int main()
 try
 {
-    //vector<int> v {1, 0, 5, 7, 9, 2, 4, 6, 8};
-    vector<int> v {1, 0, 5, 7};
+    vector<int> v {1, 0, 5, 7, 9, 2, 4, 6, 8};
+    //vector<int> v {1, 0, 5, 7};
 
     HeapNode heap(3);
 
