@@ -46,3 +46,132 @@ Sources
 https://fullyunderstood.com/pseudocodes/heap-sort/
 https://www.geeksforgeeks.org/heap-sort/
 https://www.geeksforgeeks.org/leftist-tree-leftist-heap/
+
+
+
+
+void HeapNode::push(int x)
+{
+    bool leftside = true;
+     HeapNode * temp = new HeapNode(x);
+     HeapNode * side = left;
+
+    //check to which side we will insert the node and set the variables of bool and side to the correct values
+    if (left!=nullptr && right==nullptr)
+        {
+            side = right;
+            leftside = false;
+        }
+
+    //Base Case -- One of the sides is pointing to nullptr
+    if (side == nullptr)
+    {
+        //set the corresponding side node to the new node
+        side = temp;
+
+        //
+        if(leftside)
+        {
+            left= side;
+            cout << "Left " << left->val << endl;
+        }
+        else
+        {
+            right = side;
+            cout << "right " << right->val << endl;
+        }
+        heapify();
+        return;
+    }
+
+    //None of the nodes is pointing to nullptr
+    //check for the first node right and left if they have children
+    if (left->left == nullptr)
+    {
+
+        left->push(x);
+    }
+    else if (right->left ==nullptr)
+    {
+        right->push(x);
+    }
+    else if (left->right == nullptr)
+    {
+        left->push(x);
+    }
+    else if (right->right == nullptr)
+    {
+        right->push(x);
+    }
+    //if they are balanced then decide which side to take based on the size
+    else 
+    {
+        //if the sizes are equal go to the left size 
+        if (left->size == right->size)
+        {
+                left->push(x);
+        }
+        //if the size of left is bigger than right push it right
+        else if (left->size > right->size)
+        {
+                right->push(x);
+        }
+    }
+    //increase the size
+    size ++;
+
+
+
+
+
+
+void HeapNode::push(int x)
+{
+    bool leftside = true;
+     HeapNode * temp = new HeapNode(x);
+     HeapNode * side = left;
+
+    //check to which side we will insert the node and set the variables of bool and side to the correct values
+    if (left!=nullptr && right==nullptr)
+        {
+            side = right;
+            leftside = false;
+        }
+
+    //Base Case -- One of the sides is pointing to nullptr
+    if (side == nullptr)
+    {
+        //set the corresponding side node to the new node
+        side = temp;
+
+        //
+        if(leftside)
+        {
+            
+            left= side;
+            cout << "Left " << left->val << endl;
+        }
+        else
+        {
+            right = side;
+            //cout << "right " << right->val << endl;
+        }
+        size ++;
+        heapify();
+        return;
+    }
+
+    //None of the nodes is pointing to nullptr
+    //if the sizes are equal go to the left size 
+    if (left->size == right->size)
+        {
+                left->push(x);
+        }
+        //if the size of left is bigger than right push it right
+    else if (left->size > right->size)
+        {
+                right->push(x);
+        }
+    //increase the size
+    size ++;
+}

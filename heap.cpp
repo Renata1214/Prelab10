@@ -53,7 +53,7 @@ HeapNode::Iterator& HeapNode::Iterator::operator++()
             run= itstack.top();
             pointer=run;
         }
-        else 
+        else    
         {
             HeapNode * save =itstack.top();
             itstack.pop();
@@ -71,7 +71,6 @@ HeapNode::Iterator& HeapNode::Iterator::operator++()
 
     else 
     {
-        cout << "You have reached the end of the tree" << endl;
         pointer=nullptr;
     }
 
@@ -79,13 +78,6 @@ HeapNode::Iterator& HeapNode::Iterator::operator++()
 
     return *this;
 }  
-
-// Postfix increment
-// Iterator HeapNode::Iterator:operator++(int) 
-// { 
-//     Iterator tmp = *this; ++(*this);
-//     return tmp;
-// }
 
 bool HeapNode::Iterator::operator== (const Iterator& b) { return pointer == b.pointer; };
 bool HeapNode::Iterator::operator!= (const Iterator& b) { return pointer != b.pointer; };  
@@ -98,75 +90,51 @@ HeapNode::Iterator HeapNode::end() {
     return Iterator(nullptr); // Return an iterator with a null pointer to signify the end
 }
 
+int HeapNode::maxVal()
+{
+    int maxvalue=0;
+     for (const auto& i : *this)
+    {
+        if (i.val >maxvalue)
+        {
+            maxvalue=i.val;
+        }
+    }
 
+    return maxvalue;
+}
 
 void HeapNode::push(int x)
 {
-    bool leftside = true;
-     HeapNode * temp = new HeapNode(x);
-     HeapNode * side = left;
-
-    //check to which side we will insert the node and set the variables of bool and side to the correct values
-    if (left!=nullptr && right==nullptr)
-        {
-            side = right;
-            leftside = false;
-        }
-
+     size++;
     //Base Case -- One of the sides is pointing to nullptr
-    if (side == nullptr)
+    if (left == nullptr)
     {
-        //set the corresponding side node to the new node
-        side = temp;
-
-        //
-        if(leftside)
-        {
-            left= side;
-        }
-        else
-        {
-            right = side;
-        }
+        HeapNode * temp = new HeapNode(x);
+        left = temp; 
+        //cout << "Value added to the left of  " << val << " " << left->val << endl;
         heapify();
         return;
     }
-
+    else if (right == nullptr)
+    {
+        HeapNode * temp = new HeapNode(x);
+        right = temp; 
+        //cout << "Value added to the right of  " << val << " " << right->val << endl;
+        heapify();
+        return;
+    }
     //None of the nodes is pointing to nullptr
-    //check for the first node right and left if they have children
-    if (left->left == nullptr)
-    {
-
-        left->push(x);
-    }
-    else if (right->left ==nullptr)
-    {
-        right->push(x);
-    }
-    else if (left->right == nullptr)
-    {
-        left->push(x);
-    }
-    else if (right->right == nullptr)
-    {
-        right->push(x);
-    }
-    //if they are balanced then decide which side to take based on the size
-    else 
-    {
-        //if the sizes are equal go to the left size 
-        if (left->size == right->size)
+    //if the sizes are equal go to the left size 
+    if (left->size == right->size)
         {
                 left->push(x);
         }
         //if the size of left is bigger than right push it right
-        else if (left->size > right->size)
+    else if (left->size > right->size)
         {
                 right->push(x);
         }
-    }
-    //increase the size
-    size ++;
 }
 
 int HeapNode::pop()

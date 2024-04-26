@@ -95,7 +95,7 @@ try
     for (auto x : v)
     {
         heap.push(x);
-        prn(x, heap, "push");
+       //prn(x, heap, "push");
         heap.valid();
     }
 
@@ -104,29 +104,27 @@ try
     for (const auto& x : heap) {cout << ' ' << x.str(); cout << '\n';}
 
 
-   //if (1)
-    //{
-        //int a = heap.pop();
-        //prn(a, heap, "pop");
-        //heap.valid();
-        //heap.push(a);
-        //prn(a, heap, "push");
-        //heap.valid();
-    //}
+//    if (1)
+//     {
+//         int a = heap.pop();
+//         prn(a, heap, "pop");
+//         heap.valid();
+//         heap.push(a);
+//         prn(a, heap, "push");
+//         heap.valid();
+//     }
 
     //for (const HeapNode& x : heap) cout << ' ' << x.str(); cout << '\n';
 
 
-    //std::cout << "Maximum Value: " << heap.maxVal() << std::endl;
+    std::cout << "Maximum Value: " << heap.maxVal() << std::endl;
 
-    cout <<"Working?" << endl;
-
-    while (!heap.empty())
-    {
-        //int x = heap.pop();
-        //prn(x, heap, "pop");
-        heap.valid();
-    }
+    // while (!heap.empty())
+    // {
+    //     int x = heap.pop();
+    //     prn(x, heap, "pop");
+    //     heap.valid();
+    // }
 }
 catch (string s) { cout << "Error: " << s << '\n'; }
 catch (...) { cout << "exception\n"; }

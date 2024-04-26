@@ -24,16 +24,16 @@ try
     for (auto x : v)
     {
         heap.push(x);
-        prn(x, heap, "push");
+       // prn(x, heap, "push");
         heap.valid();
     }
 
-    // while ( !heap.empty() )
-    // {
-    //     int x = heap.pop();
-    //     prn(x, heap, "pop");
-    //     heap.valid();
-    // }
+    while ( !heap.empty() )
+    {
+        int x = heap.pop();
+        //prn(x, heap, "pop");
+        heap.valid();
+    }
 }
 catch (string s) { cout << "Error: " << s << '\n'; }
 catch (...) { cout << "exception\n"; }

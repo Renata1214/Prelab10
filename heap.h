@@ -46,6 +46,7 @@ class HeapNode
         //Iterator functions
         Iterator begin();
         Iterator end();
+        int maxVal ();
 };
 
 inline std::string HeapNode::edges() const
