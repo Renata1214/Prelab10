@@ -5,23 +5,21 @@
 using std::swap;
 using namespace std;
 
-HeapNode* HeapNode::Iterator::leftmost (HeapNode * node2)
+void HeapNode::pushmanual ()
 {
-    HeapNode * leftmost1;
-
-    if(node2->left!=nullptr)
-    {
-        itstack.push(node2); //or iterator begin
-        leftmost1 = node2->left;
-        while(leftmost1->left!=nullptr)
-        {
-            itstack.push(leftmost1);
-            leftmost1= leftmost1->left;
-        }
-        pointer=leftmost1;
-    }
-    return pointer;
+    HeapNode * node=this;
+    node->left->val=1;
+    node->left->left->val=4;
+    node->left->right->val=8;
+    node->left->right->left->val=9;
+    node->left->left->left->val=5;
+    node->right->val=2;
+    node->right->left->val=7;
+    node->right->right->val=3;
+    node->right->right->left->val=6;
 }
+
+//ITERATOR CLASS FUNCTIONS
 
 HeapNode::Iterator::Iterator ()
 {
@@ -36,6 +34,29 @@ HeapNode::Iterator::Iterator(HeapNode *pointer1) {
     }
 }
 
+HeapNode* HeapNode::Iterator::leftmost (HeapNode * node2)
+{
+    HeapNode * leftmost1;
+
+    if(node2->left!=nullptr)
+    {
+        itstack.push(node2); //or iterator begin
+        //cout << "push into stack " << node2->val; 
+        leftmost1 = node2->left;
+        while(leftmost1->left!=nullptr)
+        {
+            itstack.push(leftmost1);
+            //cout << "push into stack " << leftmost1->val; 
+            leftmost1= leftmost1->left;
+        }
+        pointer=leftmost1;
+    }
+    else 
+    {
+        pointer= node2;
+    }
+    return pointer;
+}
 
 HeapNode&  HeapNode::Iterator::operator*() const { return *pointer; }
 HeapNode*  HeapNode::Iterator::operator->() { return pointer; }
@@ -56,10 +77,12 @@ HeapNode::Iterator& HeapNode::Iterator::operator++()
         else    
         {
             HeapNode * save =itstack.top();
+            //cout << "The value being popped is "<< save->val << endl;
             itstack.pop();
             if(save->right!=nullptr)
             {
                 run=leftmost(save->right);
+
             }
             else 
             {
@@ -73,7 +96,6 @@ HeapNode::Iterator& HeapNode::Iterator::operator++()
     {
         pointer=nullptr;
     }
-
     //roots have already been visited
 
     return *this;
@@ -90,6 +112,8 @@ HeapNode::Iterator HeapNode::end() {
     return Iterator(nullptr); // Return an iterator with a null pointer to signify the end
 }
 
+
+//MAX FUNCTION
 int HeapNode::maxVal()
 {
     int maxvalue=0;
@@ -104,6 +128,9 @@ int HeapNode::maxVal()
     return maxvalue;
 }
 
+//vector<int> v {1, 0, 5, 7, 9, 2, 4, 6, 8};
+
+//PUSH FUNCTION CORRECTED
 void HeapNode::push(int x)
 {
      size++;
@@ -129,14 +156,17 @@ void HeapNode::push(int x)
     if (left->size == right->size)
         {
                 left->push(x);
+                heapify();
         }
         //if the size of left is bigger than right push it right
     else if (left->size > right->size)
         {
                 right->push(x);
+                heapify();
         }
 }
 
+//POP FUNCTION WORKING
 int HeapNode::pop()
 {
     //set the val of pop to the node that is clalling it val
@@ -212,6 +242,7 @@ int HeapNode::pop()
     return popval;
 }
 
+//HEAPIFY FUNCTION
 void HeapNode::heapify()
 {
     //base condition

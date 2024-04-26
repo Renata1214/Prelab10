@@ -13,6 +13,7 @@ class HeapNode
 
         HeapNode(int v) : val(v), left(nullptr), right(nullptr), size(1) {}
         HeapNode(const HeapNode &) = delete;
+        void pushmanual ();
 
         struct Iterator
         {
@@ -69,3 +70,5 @@ inline void HeapNode::valid() const
     if (left) left->valid();
     if (right) right->valid();
 }
+
+

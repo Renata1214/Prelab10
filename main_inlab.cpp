@@ -81,8 +81,10 @@ int main()
 try
 {
     vector<int> v{ 1, 0, 5, 7, 9, 2, 4, 6, 8 };
-
     HeapNode heap(3);
+
+    //HeapNode heap(0);
+    //heap.pushmanual();
 
     auto prn = [](int x, const HeapNode& h, string a)
     {
@@ -104,17 +106,17 @@ try
     for (const auto& x : heap) {cout << ' ' << x.str(); cout << '\n';}
 
 
-//    if (1)
-//     {
-//         int a = heap.pop();
-//         prn(a, heap, "pop");
-//         heap.valid();
-//         heap.push(a);
-//         prn(a, heap, "push");
-//         heap.valid();
-//     }
+   if (1)
+    {
+        int a = heap.pop();
+        prn(a, heap, "pop");
+        heap.valid();
+        heap.push(a);
+        prn(a, heap, "push");
+        heap.valid();
+    }
 
-    //for (const HeapNode& x : heap) cout << ' ' << x.str(); cout << '\n';
+    for (const HeapNode& x : heap) cout << ' ' << x.str(); cout << '\n';
 
 
     std::cout << "Maximum Value: " << heap.maxVal() << std::endl;
